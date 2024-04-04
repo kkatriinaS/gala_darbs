@@ -12,36 +12,36 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
 @Table(name = "parking_spot_table")
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
-@ToString
 public class ParkingSpot {
 
 		@Setter(value = AccessLevel.NONE)
 		@Column(name = "Ids")
 		@Id
 		@GeneratedValue(strategy = GenerationType.AUTO)
-		private long idc;
+		private long ids;
 
 		@Column(name = "SpotStatus")
 		@Enumerated(EnumType.STRING)
 		private SpotStatus spotStatus;
 		
+		//TODO many-to-one saite ar parking lot
+		
 		
 		public ParkingSpot(long idc, SpotStatus spotStatus) {
 			super();
-			this.idc = idc;
+			this.ids = ids;
 			this.spotStatus = spotStatus;
 		}
 
 		@Override
 		public String toString() {
-			return "ParkingSpot [idc=" + idc + "]";
+			return "ParkingSpot [ids=" + ids + ", spotStatus=" + spotStatus + "]";
 		}
 
 	}
