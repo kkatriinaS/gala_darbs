@@ -61,11 +61,6 @@ public class User {
 				+ email + ", reservations=" + reservations + "]";
 	}
 
-	public void setId_user(Long id) {
-		// TODO Auto-generated method stub
-		
-	}
-
 
 }
 	
