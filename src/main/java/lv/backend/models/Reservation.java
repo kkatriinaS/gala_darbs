@@ -8,6 +8,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import lombok.AccessLevel;
 import lombok.Setter;
 import lv.backend.models.users.User;
@@ -25,23 +26,29 @@ public class Reservation {
 	@Column(name = "EndTime")
 	private LocalDateTime endTime; 
 	
+	// Many-to-one saite ar User
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User user;
 
-	//TODO pievienot one-to-one saiti ar parking spot
-	
-	public Reservation(long idr, LocalDateTime startTime, LocalDateTime endTime, User user) {
+	// One-to-one saite ar ParkingSpot
+	@OneToOne
+	@JoinColumn(name = "parking_spot_id") 
+	private ParkingSpot parkingSpot;
+
+	public Reservation(long idr, LocalDateTime startTime, LocalDateTime endTime, User user, ParkingSpot parkingSpot) {
 		super();
 		this.idr = idr;
 		this.startTime = startTime;
 		this.endTime = endTime;
 		this.user = user;
+		this.parkingSpot = parkingSpot;
 	}
 
 	@Override
 	public String toString() {
-		return "Reservation [idr=" + idr + ", startTime=" + startTime + ", endTime=" + endTime + ", user=" + user + "]";
+		return "Reservation [idr=" + idr + ", startTime=" + startTime + ", endTime=" + endTime + ", user=" + user
+				+ ", parkingSpot=" + parkingSpot + "]";
 	}
-
+	
 }

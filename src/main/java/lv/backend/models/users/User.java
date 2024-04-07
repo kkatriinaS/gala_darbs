@@ -15,43 +15,52 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lv.backend.models.Reservation;
 
-
 @Table(name = "user_table")
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
 public class User {
-	
+
 	@Setter(value = AccessLevel.NONE)
 	@Column(name = "Idu")
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long idu;
-	
+
 	@Column(name = "Name")
 	private String name;
-	
+
 	@Column(name = "Username")
-	private String username; 
-	
+	private String username;
+
 	@Column(name = "Password")
 	private String password;
-	
+
 	@Column(name = "Email")
 	private String email;
 
-	public User(String name, String username, String password, String email) {
-		
+	// One-to-many saite ar Reservations
+	@OneToMany(mappedBy = "user")
+	private Collection<Reservation> reservations;
+
+	public User(long idu, String name, String username, String password, String email,
+			Collection<Reservation> reservations) {
+		super();
+		this.idu = idu;
 		this.name = name;
 		this.username = username;
 		this.password = password;
 		this.email = email;
+		this.reservations = reservations;
 	}
-	
-	@OneToMany(mappedBy = "user")
-    private Collection<Reservation> reservations;
-	
+
+	@Override
+	public String toString() {
+		return "User [idu=" + idu + ", name=" + name + ", username=" + username + ", password=" + password + ", email="
+				+ email + ", reservations=" + reservations + "]";
+	}
+
 }
 	
 	
