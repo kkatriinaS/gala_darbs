@@ -1,0 +1,26 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<form action="#" th:action="@{/parkingArea/create}" th:object="${parkingArea}" method="post">
+	<table>
+		<tr>
+			<td>Name</td>
+			<td><input type="text" th:field="*{areaName}" /></td>
+			<td th:if="${#fields.hasErrors('areaName')}" th:errors="*{areaName}"></td>
+			<tr />
+		<tr>
+			<td>Total_spots</td>
+			<td><input type="text" th:field="*{totalSpots}" /></td>
+			<td th:if="${#fields.hasErrors('totalSpots')}" th:errors="*{totalSpots}"></td>
+			<tr />
+
+		<tr>
+
+		<tr>
+			<td><button type="submit">Save Parking area</button></td>
+		</tr>
+	</table>
+
+</form>
+
+
+</html>

@@ -7,9 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import lv.backend.models.ParkingArea;
 import lv.backend.models.ParkingSpot;
 import lv.backend.repos.IParkingAreaRepo;
+import lv.backend.services.IParkingAreaServices;
 import lv.backend.utils.MyException;
 
-public class ParkingAreaServicesImplementation {
+public class ParkingAreaServicesImplementation implements IParkingAreaServices{
 
 	@Autowired
 	private IParkingAreaRepo parkingAreaRepo;
@@ -49,5 +50,17 @@ public class ParkingAreaServicesImplementation {
 			throw new MyException("Wrong id");
 		}
 
+	}
+
+	@Override
+	public ArrayList<ParkingArea> selectAllParkingArea() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ParkingArea createNewParkingArea(String name, int totalSpots) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
