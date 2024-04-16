@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import lv.backend.models.users.User;
 import lv.backend.services.IUserServices;
 
-
 public class UserController {
 
 	@Autowired
@@ -45,8 +44,7 @@ public class UserController {
 	}
 
 	@PostMapping("/user/update/{id}")
-	public String updateUserByIdPostFunc(@PathVariable("id") Long id, @Validated User user,
-			BindingResult result) {
+	public String updateUserByIdPostFunc(@PathVariable("id") Long id, @Validated User user, BindingResult result) {
 		if (!result.hasErrors()) {
 			try {
 				User temp = userServices.updateUserById(id, user.getName(), user.getUsername(), user.getEmail());

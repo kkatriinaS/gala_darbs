@@ -14,8 +14,10 @@ public interface IReservationServices {
 
 	Reservation createNewReservation(LocalDateTime startTime, LocalDateTime endTime );
 
-	Reservation updateParkingSpotById(Long id, LocalDateTime startTime, LocalDateTime endTime) throws MyException;
+	Reservation updateReservationById(Long id, LocalDateTime startTime, LocalDateTime endTime) throws MyException;
 
-	void deleteParkingSpotById(Long id) throws MyException;
+	void deleteReservationById(Long id) throws MyException;
+
+	
 
 }
