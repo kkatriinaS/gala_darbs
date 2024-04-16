@@ -3,11 +3,13 @@ package lv.backend.services.impl;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import lv.backend.models.users.User;
 import lv.backend.repos.IUserRepo;
 import lv.backend.utils.MyException;
 
+@Service
 public class UserServicesImplementation {
 
 	@Autowired

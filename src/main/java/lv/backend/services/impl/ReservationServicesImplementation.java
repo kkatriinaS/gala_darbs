@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import lv.backend.models.ParkingSpot;
 import lv.backend.models.Reservation;
@@ -11,6 +12,7 @@ import lv.backend.models.users.User;
 import lv.backend.repos.IReservationRepo;
 import lv.backend.utils.MyException;
 
+@Service
 public class ReservationServicesImplementation {
 
 	@Autowired

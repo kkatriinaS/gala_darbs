@@ -56,4 +56,9 @@ public class ParkingSpot {
 				+ ", parkingArea=" + parkingArea + "]";
 	}
 
+	public Object getTotalSpots() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

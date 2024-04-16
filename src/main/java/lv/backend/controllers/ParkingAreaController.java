@@ -21,7 +21,7 @@ public class ParkingAreaController {
 	@GetMapping("/parkingArea/create")
 	public String createParkingAreaGetFunc(ParkingArea parkingArea, Model model) {
 		model.addAttribute("allParkingAreas", parkingAreaServices.selectAllParkingArea());
-		return "academicStaff-create-page";
+		return "parkingArea-create-page";
 	}
 
 	@PostMapping("/parkingArea/create")
