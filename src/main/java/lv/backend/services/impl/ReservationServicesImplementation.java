@@ -10,10 +10,11 @@ import lv.backend.models.ParkingSpot;
 import lv.backend.models.Reservation;
 import lv.backend.models.users.User;
 import lv.backend.repos.IReservationRepo;
+import lv.backend.services.IReservationServices;
 import lv.backend.utils.MyException;
 
 @Service
-public class ReservationServicesImplementation {
+public class ReservationServicesImplementation implements IReservationServices {
 
 	@Autowired
 	private IReservationRepo reservationRepo;
@@ -57,5 +58,24 @@ public class ReservationServicesImplementation {
 			throw new MyException("Wrong id");
 		}
 
+	}
+
+	@Override
+	public ArrayList<Reservation> selectAllReservations() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Reservation createNewReservation(LocalDateTime startTime, LocalDateTime endTime) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Reservation updateReservationById(Long id, LocalDateTime startTime, LocalDateTime endTime)
+			throws MyException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

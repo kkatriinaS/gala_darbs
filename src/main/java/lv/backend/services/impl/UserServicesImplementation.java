@@ -7,10 +7,11 @@ import org.springframework.stereotype.Service;
 
 import lv.backend.models.users.User;
 import lv.backend.repos.IUserRepo;
+import lv.backend.services.IUserServices;
 import lv.backend.utils.MyException;
 
 @Service
-public class UserServicesImplementation {
+public class UserServicesImplementation implements IUserServices{
 
 	@Autowired
 	private IUserRepo userRepo;
@@ -51,6 +52,12 @@ public class UserServicesImplementation {
 			throw new MyException("Wrong id");
 		}
 
+	}
+
+	@Override
+	public User createNewUser(String name, String username, String email) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

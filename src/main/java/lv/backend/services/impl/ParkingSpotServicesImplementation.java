@@ -10,10 +10,11 @@ import lv.backend.models.ParkingSpot;
 import lv.backend.models.Reservation;
 import lv.backend.models.SpotStatus;
 import lv.backend.repos.IParkingSpotRepo;
+import lv.backend.services.IParkingSpotServices;
 import lv.backend.utils.MyException;
 
 @Service
-public class ParkingSpotServicesImplementation {
+public class ParkingSpotServicesImplementation implements IParkingSpotServices {
 
 	@Autowired
 	private IParkingSpotRepo parkingSpotRepo;
@@ -56,5 +57,23 @@ public class ParkingSpotServicesImplementation {
 			throw new MyException("Wrong id");
 		}
 
+	}
+
+	@Override
+	public ArrayList<ParkingSpot> selectAllParkingSpots() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ParkingSpot createNewParkingSpot(Enum<SpotStatus> spotStatus) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ParkingSpot updateParkingSpotById(Long id, Enum<SpotStatus> spotStatus) throws MyException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
