@@ -6,4 +6,6 @@ import lv.backend.models.users.User;
 
 public interface IUserRepo extends CrudRepository <User, Long> {
 
+	User findByUsername(String username);
+
 }

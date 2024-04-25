@@ -3,8 +3,10 @@ package lv.backend.services.impl;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import lv.backend.dto.UserDto;
 import lv.backend.models.users.User;
 import lv.backend.repos.IUserRepo;
 import lv.backend.services.IUserServices;
@@ -59,5 +61,16 @@ public class UserServicesImplementation implements IUserServices{
 		// TODO Auto-generated method stub
 		return null;
 	}
+	@Override
+	 public User findByUsername(String username) {
+		  return userRepo.findByUsername(username);
+		 }
+
+		 @Override
+		 public User save(UserDto userDto) {
+		  User user;
+			user = new User(0, userDto.getName(),userDto.getUsername(), userDto.getPassword(), userDto.getEmail(), null);
+		  return userRepo.save(user);
+		 }
 
 }
