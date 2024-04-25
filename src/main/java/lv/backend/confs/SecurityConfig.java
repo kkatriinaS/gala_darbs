@@ -19,7 +19,7 @@ public class SecurityConfig {
         .authorizeHttpRequests()
 		.requestMatchers("/parkingArea/showAll").permitAll()
 		.requestMatchers("/parkingArea/delete").hasAnyAuthority("ADMIN")
-		.requestMatchers("/parkingArea/create").hasAnyAuthority("ADMIN");
+		.requestMatchers("/parkingArea/create").permitAll();
 	
 
 		return http.build();
