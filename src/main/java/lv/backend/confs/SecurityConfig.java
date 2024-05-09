@@ -1,48 +1,69 @@
 package lv.backend.confs;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import jakarta.servlet.DispatcherType;
+import lv.backend.services.impl.CustomUserDetailsServiceImpl;
 
-import lv.backend.services.impl.CustomUserDetailsService;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
-	@Autowired
-	CustomUserDetailsService customUserDetailsService;
+
 
 	@Bean
-	public static PasswordEncoder passwordEncoder() {
-		return new BCryptPasswordEncoder();
+	public CustomUserDetailsServiceImpl userDetailsManager() {
+		return new CustomUserDetailsServiceImpl();
+	}
+	@Bean	
+	PasswordEncoder passwordEncoderSimple2() {
+		return PasswordEncoderFactories.createDelegatingPasswordEncoder();
+		
+		
+	}
+
+	@Bean
+	public AuthenticationManager authManager(HttpSecurity http) throws Exception {
+
+		AuthenticationManagerBuilder authenticationManagerBuilder = http
+				.getSharedObject(AuthenticationManagerBuilder.class);
+
+		authenticationManagerBuilder.userDetailsService(userDetailsManager()).passwordEncoder(passwordEncoderSimple2());
+		return authenticationManagerBuilder.build();
 	}
 	
+	
+
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-		http.csrf()
-		.disable().authorizeHttpRequests()
+		http
+		.csrf()
+		.disable()
+		.authorizeHttpRequests()
 		.requestMatchers("/parkingArea/showAll").permitAll()
 		.requestMatchers("/parkingArea/delete").hasAnyAuthority("ADMIN")
 		.requestMatchers("/parkingArea/create").permitAll()
-		.requestMatchers("/register").permitAll().requestMatchers("home")
-	    .permitAll().and().formLogin().loginPage("/login").loginProcessingUrl("/login")
-	    .defaultSuccessUrl("/home", true).permitAll().and().logout().invalidateHttpSession(true)
-	    .clearAuthentication(true).logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-	    .logoutSuccessUrl("/login?logout").permitAll();
+		.requestMatchers("/parkingSpot/create").permitAll()
+		.requestMatchers("/parkingSpot/showAll").permitAll()
+		.requestMatchers("/parkingArea/update/**").permitAll()
+		.requestMatchers("/home").permitAll()
+		.requestMatchers("/register").permitAll()
+		.requestMatchers("/user/error").permitAll()
+	   
 		
+		.dispatcherTypeMatchers(DispatcherType.FORWARD).permitAll().and().formLogin()
+		.permitAll().and().logout().permitAll().and().exceptionHandling().accessDeniedPage("/my-access-denied").and().csrf().disable();
+     
 		return http.build();
 
 	}
 
-	@Autowired
-	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-		auth.userDetailsService(customUserDetailsService).passwordEncoder(passwordEncoder());
-	}
+	
 }

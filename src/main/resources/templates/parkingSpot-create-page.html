@@ -1,0 +1,21 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<form action="#" th:action="@{/parkingSpot/create}" th:object="${parkingSpot}" method="post">
+    <table>
+        <tr>
+            <td>Spot status</td>
+            <td>
+                <select th:field="*{spotStatus}">
+                    <option th:each="status : ${T(lv.backend.models.SpotStatus).values()}" 
+                            th:value="${status}" th:text="${status}"></option>
+                </select>
+            </td>
+            <td th:if="${#fields.hasErrors('spotStatus')}" th:errors="*{spotStatus}"></td>
+        </tr>
+       
+       <td><button type="submit">Save Parking spot</button></td>
+    </table>
+</form>
+
+
+</html>

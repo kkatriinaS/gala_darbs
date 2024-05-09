@@ -4,6 +4,7 @@ import org.springframework.boot.CommandLineRunner;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 
 import lv.backend.models.ParkingArea;
 import lv.backend.models.ParkingSpot;
@@ -22,6 +23,7 @@ public class BackendApplication {
 		SpringApplication.run(BackendApplication.class, args);
 	}
 
+	@Bean
 	public CommandLineRunner testModelLayer(IUserRepo userRepo, IParkingAreaRepo parkingAreaRepo,
 			IParkingSpotRepo parkingSpotRepo, IReservationRepo reservationRepo) {
 		return new CommandLineRunner() {

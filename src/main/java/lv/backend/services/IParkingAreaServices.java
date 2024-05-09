@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 
 import lv.backend.models.ParkingArea;
+import lv.backend.models.ParkingSpot;
 import lv.backend.utils.MyException;
 
 
@@ -13,10 +14,14 @@ public interface IParkingAreaServices {
 
 	ArrayList<ParkingArea> selectAllParkingArea();
 
-	ParkingArea createNewParkingArea(String name, int totalSpots);
+	//ParkingArea createNewParkingArea(String name, int totalSpots);
 
 	ParkingArea updateParkingAreaById(Long id, String name, int totalSpots) throws MyException;
 
 	void deleteParkingAreaById(Long id) throws MyException;
+
+	ParkingArea createNewParkingArea(String name, int totalSpots, ParkingSpot parkingSpots);
+
+	ArrayList<ParkingArea> retrieveAllParkingAreas();
 
 }

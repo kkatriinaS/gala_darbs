@@ -61,8 +61,8 @@ public class ParkingSpotServicesImplementation implements IParkingSpotServices {
 
 	@Override
 	public ArrayList<ParkingSpot> selectAllParkingSpots() {
-		// TODO Auto-generated method stub
-		return null;
+		return (ArrayList<ParkingSpot>) parkingSpotRepo.findAll();
+		
 	}
 
 	@Override

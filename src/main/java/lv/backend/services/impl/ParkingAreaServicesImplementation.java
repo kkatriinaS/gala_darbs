@@ -17,10 +17,12 @@ public class ParkingAreaServicesImplementation implements IParkingAreaServices{
 	@Autowired
 	private IParkingAreaRepo parkingAreaRepo;
 
+	@Override
 	public ParkingArea createNewParkingArea(String name, int totalSpots, ParkingSpot parkingSpots) {
 		return parkingAreaRepo.save(new ParkingArea(totalSpots, name, totalSpots, null));
 	}
 
+	@Override
 	public ParkingArea retrieveParkingAreaById(Long id) throws MyException {
 		if (parkingAreaRepo.existsById(id)) {
 			return parkingAreaRepo.findById(id).get();
@@ -29,10 +31,12 @@ public class ParkingAreaServicesImplementation implements IParkingAreaServices{
 		}
 	}
 
+	@Override
 	public ArrayList<ParkingArea> retrieveAllParkingAreas() {
 		return (ArrayList<ParkingArea>) parkingAreaRepo.findAll();
 	}
 
+	@Override
 	public ParkingArea updateParkingAreaById(Long id, String name, int totalSpots) throws MyException {
 		if (parkingAreaRepo.existsById(id)) {
 			ParkingArea updatedParkingArea = parkingAreaRepo.findById(id).get();
@@ -45,6 +49,7 @@ public class ParkingAreaServicesImplementation implements IParkingAreaServices{
 		}
 	}
 
+	@Override
 	public void deleteParkingAreaById(Long id) throws MyException {
 		if (parkingAreaRepo.existsById(id)) {
 			parkingAreaRepo.deleteById(id);
@@ -56,13 +61,9 @@ public class ParkingAreaServicesImplementation implements IParkingAreaServices{
 
 	@Override
 	public ArrayList<ParkingArea> selectAllParkingArea() {
-		// TODO Auto-generated method stub
-		return null;
+		return (ArrayList<ParkingArea>) parkingAreaRepo.findAll();
 	}
 
-	@Override
-	public ParkingArea createNewParkingArea(String name, int totalSpots) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
+
 }

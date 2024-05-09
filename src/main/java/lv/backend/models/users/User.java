@@ -1,12 +1,17 @@
 package lv.backend.models.users;
 
+import java.util.ArrayList;
 import java.util.Collection;
+
+import org.springframework.security.core.GrantedAuthority;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AccessLevel;
@@ -14,6 +19,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lv.backend.models.Reservation;
+
 
 @Table(name = "user_table")
 @Entity
@@ -43,6 +49,10 @@ public class User {
 	// One-to-many saite ar Reservations
 	@OneToMany(mappedBy = "user")
 	private Collection<Reservation> reservations;
+	
+	@ManyToMany(mappedBy = "myUsers", fetch = FetchType.EAGER)
+	private Collection<Authorities> myAuthorities = new ArrayList<>();
+	
 
 	public User(long idu, String name, String username, String password, String email,
 			Collection<Reservation> reservations) {
@@ -59,6 +69,23 @@ public class User {
 	public String toString() {
 		return "User [idu=" + idu + ", name=" + name + ", username=" + username + ", password=" + password + ", email="
 				+ email + ", reservations=" + reservations + "]";
+	}
+
+	public Collection<? extends GrantedAuthority> getMyAuthorities() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	public void addAuthority(Authorities authority) {
+		if (!myAuthorities.contains(authority)) {
+			myAuthorities.add(authority);
+		}
+	}
+
+	public void removeAuthority(Authorities authority) {
+		if (myAuthorities.contains(authority)) {
+			myAuthorities.remove(authority);
+		}
 	}
 
 

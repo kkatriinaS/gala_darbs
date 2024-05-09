@@ -8,6 +8,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import lv.backend.models.ParkingArea;
 import lv.backend.services.IParkingAreaServices;
@@ -23,15 +24,15 @@ public class ParkingAreaController {
 		model.addAttribute("allParkingAreas", parkingAreaServices.selectAllParkingArea());
 		return "parkingArea-create-page";
 	}
-
 	@PostMapping("/parkingArea/create")
-	public String createParkingAreaPostFunc(@Validated ParkingArea parkingArea, BindingResult result) {
-		if (!result.hasErrors()) {
-			parkingAreaServices.createNewParkingArea(parkingArea.getAreaName(), parkingArea.getTotalSpots());
-			return "redirect:/parkingArea/showAll";
-		} else {
-			return "parkingArea-create-page";
-		}
+	public String createParkingAreaPostFunc(@Validated ParkingArea parkingArea, BindingResult result, Model model) {
+	    if (!result.hasErrors()) {
+	        parkingAreaServices.createNewParkingArea(parkingArea.getAreaName(), parkingArea.getTotalSpots(), null);
+	        model.addAttribute("allParkingAreas", parkingAreaServices.selectAllParkingArea());
+	        return "redirect:/parkingArea/showAll";
+	    } else {
+	        return "parkingArea-create-page";
+	    }
 	}
 
 	@GetMapping("/parkingArea/update/{id}")

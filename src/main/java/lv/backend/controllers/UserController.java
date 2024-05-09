@@ -15,36 +15,38 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import lv.backend.dto.UserDto;
 import lv.backend.models.users.User;
+import lv.backend.repos.IUserRepo;
 import lv.backend.services.IUserServices;
 import lv.backend.services.impl.UserServicesImplementation;
 
 public class UserController {
 
-	@Autowired
-	private IUserServices userServices;
-	private UserDetailsService userDetailsService;
+    @Autowired
+    private IUserServices userServices;
+    
+    private IUserRepo userRepo;
 
-	private UserServicesImplementation userServicesImplementation;
+    private UserServicesImplementation userServicesImplementation;
 
-	public UserController(UserServicesImplementation userService) {
-		this.userServicesImplementation = userService;
-	}
+    public UserController(UserServicesImplementation userService) {
+        this.userServicesImplementation = userService;
+    }
 
-	@GetMapping("/user/create")
-	public String createUserGetFunc(User user, Model model) {
-		model.addAttribute("allusers", userServices.retrieveAllUsers());
-		return "user-create-page";
-	}
+    @GetMapping("/user/create")
+    public String createUserGetFunc(User user, Model model) {
+        model.addAttribute("allusers", userServices.retrieveAllUsers());
+        return "user-create-page";
+    }
 
-	@PostMapping("/user/create")
-	public String createUserPostFunc(@Validated User user, BindingResult result) {
-		if (!result.hasErrors()) {
-			userServices.createNewUser(user.getName(), user.getUsername(), user.getEmail());
-			return "redirect:/user/showAll";
-		} else {
-			return "user-create-page";
-		}
-	}
+    @PostMapping("/user/create")
+    public String createUserPostFunc(@Validated User user, BindingResult result) {
+        if (!result.hasErrors()) {
+            userServices.createNewUser(user.getName(), user.getUsername(), user.getEmail());
+            return "redirect:/user/showAll";
+        } else {
+            return "user-create-page";
+        }
+    }
 
 	@GetMapping("/user/update/{id}")
 	public String updateUserByIdGetFunc(@PathVariable("id") Long id, Model model) {
@@ -102,36 +104,35 @@ public class UserController {
 	public String erroruserFunc() {
 		return "error-page";
 	}
-
-	@GetMapping("/home")
-	public String home(Model model, Principal principal) {
-		UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
-		model.addAttribute("userdetail", userDetails);
-		return "home";
+	
+	@PostMapping("/login-success")
+	public String loginSuccess() {
+	    return "home";
 	}
 
-	@GetMapping("/login")
-	public String login(Model model, UserDto userDto) {
+	 @GetMapping("/home")
+	 public String home(Model model, Principal principal) {
+	  UserDetails userDetails = userServices.loadUserByUsername(principal.getName());
+	  model.addAttribute("userdetail", userDetails);
+	  return "home";
+	 }
 
-		model.addAttribute("user", userDto);
-		return "login";
-	}
+	 @GetMapping("/login")
+	 public String login(Model model, UserDto userDto) {
 
-	@GetMapping("/register")
-	public String register(Model model, UserDto userDto) {
-		model.addAttribute("user", userDto);
-		return "register";
-	}
+	  model.addAttribute("user", userDto);
+	  return "login";
+	 }
 
-	@PostMapping("/register")
-	public String registerSava(@ModelAttribute("user") UserDto userDto, Model model) {
-		User user = userServicesImplementation.findByUsername(userDto.getUsername());
-		if (user != null) {
-			model.addAttribute("Userexist", user);
+		@GetMapping("/register")
+		public String getRegPage(@ModelAttribute("user") User user) {
 			return "register";
 		}
-		userServicesImplementation.save(userDto);
-		return "redirect:/register?success";
+		
+		@PostMapping("/register")
+		public String saveUser(@ModelAttribute("user") User user, Model model) {
+			userRepo.save(user);
+			model.addAttribute("message", "Submitted Successfully");
+			return "register";
+		}
 	}
-
-}

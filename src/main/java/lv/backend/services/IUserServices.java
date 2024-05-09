@@ -2,6 +2,8 @@ package lv.backend.services;
 
 import java.util.ArrayList;
 
+import org.springframework.security.core.userdetails.UserDetails;
+
 import lv.backend.dto.UserDto;
 import lv.backend.models.users.User;
 import lv.backend.utils.MyException;
@@ -21,5 +23,7 @@ public interface IUserServices {
 	User save(UserDto userdto);
 	
 	User findByUsername(String username);
+
+	UserDetails loadUserByUsername(String name);
 
 }

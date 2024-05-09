@@ -3,6 +3,7 @@ package lv.backend.services.impl;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +14,7 @@ import lv.backend.services.IUserServices;
 import lv.backend.utils.MyException;
 
 @Service
-public class UserServicesImplementation implements IUserServices{
+public class UserServicesImplementation implements IUserServices {
 
 	@Autowired
 	private IUserRepo userRepo;
@@ -61,16 +62,23 @@ public class UserServicesImplementation implements IUserServices{
 		// TODO Auto-generated method stub
 		return null;
 	}
-	@Override
-	 public User findByUsername(String username) {
-		  return userRepo.findByUsername(username);
-		 }
 
-		 @Override
-		 public User save(UserDto userDto) {
-		  User user;
-			user = new User(0, userDto.getName(),userDto.getUsername(), userDto.getPassword(), userDto.getEmail(), null);
-		  return userRepo.save(user);
-		 }
+	@Override
+	public User save(UserDto userDto) {
+		User user;
+		user = new User(0, userDto.getName(), userDto.getUsername(), userDto.getPassword(), userDto.getEmail(), null);
+		return userRepo.save(user);
+	}
+
+	@Override
+	public User findByUsername(String username) {
+		return userRepo.findByUsername(username);
+	}
+
+	@Override
+	public UserDetails loadUserByUsername(String name) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }
