@@ -1,6 +1,7 @@
 package lv.backend.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -24,7 +25,7 @@ public class ParkingAreaController {
 		model.addAttribute("allParkingAreas", parkingAreaServices.selectAllParkingArea());
 		return "parkingArea-create-page";
 	}
-	@PostMapping("/parkingArea/create")
+	/*@PostMapping("/parkingArea/create")
 	public String createParkingAreaPostFunc(@Validated ParkingArea parkingArea, BindingResult result, Model model) {
 	    if (!result.hasErrors()) {
 	        parkingAreaServices.createNewParkingArea(parkingArea.getAreaName(), parkingArea.getTotalSpots(), null);
@@ -33,7 +34,17 @@ public class ParkingAreaController {
 	    } else {
 	        return "parkingArea-create-page";
 	    }
+	}*/
+	@PostMapping("/parkingArea/create")
+	public ResponseEntity<Void> createParkingAreaPostFunc(@RequestBody @Validated ParkingArea parkingArea, BindingResult result, Model model) {
+	    if (!result.hasErrors()) {
+	        parkingAreaServices.createNewParkingArea(parkingArea.getAreaName(), parkingArea.getTotalSpots(), null);
+	        return ResponseEntity.ok().build();
+	    } else {
+	        return ResponseEntity.badRequest().build();
+	    }
 	}
+
 
 	@GetMapping("/parkingArea/update/{id}")
 	public String updateParkingAreaByIdGetFunc(@PathVariable("id") Long id, Model model) {
