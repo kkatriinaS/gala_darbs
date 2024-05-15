@@ -10,13 +10,13 @@ import retrofit2.http.GET;
 import retrofit2.http.POST;
 
 public interface ParkingAreaApi {
-    @GET("/parkingArea/showAll")
-    Call<List<ParkingArea>> selectAllParkingArea();
 
-    @POST("/parkingArea")
-    Call<ParkingArea> save(@Body ParkingArea parkingArea);
+        @GET("/parkingArea/showAll")
+        Call<List<ParkingArea>> selectAllParkingArea();
 
-    @POST("/parkingArea/create")
-    Call<ParkingArea> createParkingArea(@Body ParkingArea parkingArea);
-}
+        @POST("/parkingArea/create")
+        Call<Void> createParkingArea(@Body ParkingArea parkingArea);
+    }
+
+
 
