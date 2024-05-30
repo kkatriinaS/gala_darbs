@@ -2,11 +2,11 @@ package com.example.parkingapp;
 
 import static com.example.parkingapp.R.layout.activity_main;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.parkingapp.model.ParkingArea;
 import com.example.parkingapp.retrofit.ParkingAreaApi;
@@ -21,12 +21,11 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MainActivity extends AppCompatActivity {
-
+public class CreateParkingAreaActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(activity_main);
+        setContentView(R.layout.activity_create_parking_area);
 
         initializeComponents();
     }
@@ -44,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
             String totalSpots = String.valueOf(inputEditSpots.getText());
 
             if (areaName.isEmpty() || totalSpots.isEmpty()) {
-                Toast.makeText(MainActivity.this, "All fields must be filled", Toast.LENGTH_SHORT).show();
+                Toast.makeText(CreateParkingAreaActivity.this, "All fields must be filled", Toast.LENGTH_SHORT).show();
                 return;
             }
 
@@ -57,25 +56,25 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<Void> call, Response<Void> response) {
                         if (response.isSuccessful()) {
-                            Toast.makeText(MainActivity.this, "Save successful!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(CreateParkingAreaActivity.this, "Save successful!", Toast.LENGTH_SHORT).show();
 
-                            Intent intent = new Intent(MainActivity.this, UserActivity.class);
+                            Intent intent = new Intent(CreateParkingAreaActivity.this, UserActivity.class);
                             startActivity(intent);
                             finish();
                         } else {
                             String errorMessage = "Save failed with error code: " + response.code();
-                            Toast.makeText(MainActivity.this, errorMessage, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(CreateParkingAreaActivity.this, errorMessage, Toast.LENGTH_SHORT).show();
                         }
                     }
 
                     @Override
                     public void onFailure(Call<Void> call, Throwable t) {
-                        Toast.makeText(MainActivity.this, "Save failed!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(CreateParkingAreaActivity.this, "Save failed!", Toast.LENGTH_SHORT).show();
                         Logger.getLogger(MainActivity.class.getName()).log(Level.SEVERE, "Error occurred", t);
                     }
                 });
             } catch (NumberFormatException e) {
-                Toast.makeText(MainActivity.this, "Invalid number format", Toast.LENGTH_SHORT).show();
+                Toast.makeText(CreateParkingAreaActivity.this, "Invalid number format", Toast.LENGTH_SHORT).show();
             }
         });
     }

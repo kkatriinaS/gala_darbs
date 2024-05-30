@@ -16,6 +16,7 @@ public interface ParkingAreaApi {
 
         @POST("/parkingArea/create")
         Call<Void> createParkingArea(@Body ParkingArea parkingArea);
+
     }
 
 

@@ -15,7 +15,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ShowAllParkingAreasActivity extends AppCompatActivity {
+public class UserActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private ParkingAreaAdapter adapter;
@@ -38,13 +38,13 @@ public class ShowAllParkingAreasActivity extends AppCompatActivity {
                     adapter = new ParkingAreaAdapter(response.body());
                     recyclerView.setAdapter(adapter);
                 } else {
-                    Toast.makeText(ShowAllParkingAreasActivity.this, "Failed to retrieve parking areas", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(UserActivity.this, "Failed to retrieve parking areas", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<List<ParkingArea>> call, Throwable t) {
-                Toast.makeText(ShowAllParkingAreasActivity.this, "An error occurred", Toast.LENGTH_SHORT).show();
+                Toast.makeText(UserActivity.this, "An error occurred", Toast.LENGTH_SHORT).show();
             }
         });
     }
