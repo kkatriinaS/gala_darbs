@@ -23,11 +23,9 @@ public class SecurityConfig {
 	public CustomUserDetailsServiceImpl userDetailsManager() {
 		return new CustomUserDetailsServiceImpl();
 	}
-	@Bean	
+	@Bean
 	PasswordEncoder passwordEncoderSimple2() {
 		return PasswordEncoderFactories.createDelegatingPasswordEncoder();
-		
-		
 	}
 
 	@Bean
@@ -49,11 +47,12 @@ public class SecurityConfig {
 		.disable()
 		.authorizeHttpRequests()
 		.requestMatchers("/parkingArea/showAll").permitAll()
-		.requestMatchers("/parkingArea/delete").hasAnyAuthority("ADMIN")
+		.requestMatchers("/parkingArea/delete/**").permitAll()
 		.requestMatchers("/parkingArea/create").permitAll()
 		.requestMatchers("/parkingSpot/create").permitAll()
 		.requestMatchers("/parkingSpot/showAll").permitAll()
 		.requestMatchers("/parkingArea/update/**").permitAll()
+		.requestMatchers("/reservation/showAll").permitAll()
 		.requestMatchers("/home").permitAll()
 		.requestMatchers("/register").permitAll()
 		.requestMatchers("/user/error").permitAll()

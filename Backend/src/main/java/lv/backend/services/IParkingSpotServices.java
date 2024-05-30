@@ -1,6 +1,7 @@
 package lv.backend.services;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import lv.backend.models.ParkingSpot;
 import lv.backend.models.SpotStatus;
@@ -16,5 +17,6 @@ public interface IParkingSpotServices {
 	ParkingSpot updateParkingSpotById(Long id, Enum<SpotStatus> spotStatus) throws MyException;
 
 	void deleteParkingSpotById(Long id) throws MyException;
+
 
 }

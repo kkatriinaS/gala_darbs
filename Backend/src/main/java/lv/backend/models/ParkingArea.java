@@ -1,7 +1,9 @@
 package lv.backend.models;
 
 import java.util.Collection;
+import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -34,15 +36,18 @@ public class ParkingArea {
 	private int totalSpots;
 
 	// One-to-many saite ar ParkingSpots
-	@OneToMany(mappedBy = "parkingArea")
-	private Collection<ParkingSpot> parkingSpots;
+	//@OneToMany(mappedBy = "parkingArea")
+	//private Collection<ParkingSpot> parkingSpots;
 
+	@OneToMany(mappedBy = "parkingArea", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ParkingSpot> parkingSpots;
+	
 	public ParkingArea(long ida, String areaName, int totalSpots, Collection<ParkingSpot> parkingSpots) {
 		super();
 		this.ida = ida;
 		this.areaName = areaName;
 		this.totalSpots = totalSpots;
-		this.parkingSpots = parkingSpots;
+		this.parkingSpots = (List<ParkingSpot>) parkingSpots;
 	}
 
 	@Override

@@ -24,4 +24,6 @@ public interface IParkingAreaServices {
 
 	ArrayList<ParkingArea> retrieveAllParkingAreas();
 
+	
+
 }

@@ -19,7 +19,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lv.backend.models.Reservation;
-
+import lv.backend.models.users.Authorities;
 
 @Table(name = "user_table")
 @Entity
@@ -54,6 +54,7 @@ public class User {
 	private Collection<Authorities> myAuthorities = new ArrayList<>();
 	
 
+
 	public User(long idu, String name, String username, String password, String email,
 			Collection<Reservation> reservations) {
 		super();
@@ -65,17 +66,12 @@ public class User {
 		this.reservations = reservations;
 	}
 
-	@Override
-	public String toString() {
-		return "User [idu=" + idu + ", name=" + name + ", username=" + username + ", password=" + password + ", email="
-				+ email + ", reservations=" + reservations + "]";
-	}
+	//@Override
+	//public String toString() {
+		//return "User [idu=" + idu + ", name=" + name + ", username=" + username + ", password=" + password + ", email="
+			//	+ email + ", reservations=" + reservations + "]";
+	//}
 
-	public Collection<? extends GrantedAuthority> getMyAuthorities() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
 	public void addAuthority(Authorities authority) {
 		if (!myAuthorities.contains(authority)) {
 			myAuthorities.add(authority);

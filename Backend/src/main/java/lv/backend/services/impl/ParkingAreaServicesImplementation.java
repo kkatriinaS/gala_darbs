@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import lv.backend.models.ParkingArea;
 import lv.backend.models.ParkingSpot;
 import lv.backend.repos.IParkingAreaRepo;
+import lv.backend.repos.IParkingSpotRepo;
 import lv.backend.services.IParkingAreaServices;
 import lv.backend.utils.MyException;
 
@@ -16,6 +17,7 @@ public class ParkingAreaServicesImplementation implements IParkingAreaServices{
 
 	@Autowired
 	private IParkingAreaRepo parkingAreaRepo;
+	
 
 	@Override
 	public ParkingArea createNewParkingArea(String name, int totalSpots, ParkingSpot parkingSpots) {
@@ -64,6 +66,10 @@ public class ParkingAreaServicesImplementation implements IParkingAreaServices{
 		return (ArrayList<ParkingArea>) parkingAreaRepo.findAll();
 	}
 
+	
+
+	}
 
 
-}
+
+

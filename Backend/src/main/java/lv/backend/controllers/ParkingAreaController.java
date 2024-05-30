@@ -1,24 +1,33 @@
 package lv.backend.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import lv.backend.models.ParkingArea;
+import lv.backend.models.ParkingSpot;
 import lv.backend.services.IParkingAreaServices;
+import lv.backend.services.IParkingSpotServices;
+import lv.backend.services.impl.ParkingSpotServicesImplementation;
 
 @Controller
 public class ParkingAreaController {
 
 	@Autowired
 	private IParkingAreaServices parkingAreaServices;
+	
+	@Autowired
+	private IParkingSpotServices parkingSpotServices;
 
 	@GetMapping("/parkingArea/create")
 	public String createParkingAreaGetFunc(ParkingArea parkingArea, Model model) {
@@ -69,7 +78,7 @@ public class ParkingAreaController {
 				return "redirect:/parkingArea/error";
 			}
 		} else {
-			return "parkingArea-update-page";
+			return "parkingArea-all-page";
 		}
 	}
 
@@ -83,6 +92,8 @@ public class ParkingAreaController {
 			return "error-page";
 		}
 	}
+
+
 
 	@GetMapping("/parkingArea/showAll/{id}")
 	public String parkingAreaByIdFunc(@PathVariable("id") Long id, Model model) {
