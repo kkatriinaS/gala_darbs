@@ -1,9 +1,9 @@
 package lv.backend.models.users;
 
+import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collection;
 
-import org.springframework.security.core.GrantedAuthority;
+import java.util.Collection;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -14,19 +14,25 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotNull;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lv.backend.models.Reservation;
-import lv.backend.models.users.Authorities;
 
 @Table(name = "user_table")
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
-public class User {
+public class User implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@Setter(value = AccessLevel.NONE)
 	@Column(name = "Idu")
@@ -55,10 +61,9 @@ public class User {
 	
 
 
-	public User(long idu, String name, String username, String password, String email,
+	public User(@NotNull String name, @NotNull String username, @NotNull String password, @NotNull @Email String email,
 			Collection<Reservation> reservations) {
-		super();
-		this.idu = idu;
+
 		this.name = name;
 		this.username = username;
 		this.password = password;

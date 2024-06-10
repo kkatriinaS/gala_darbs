@@ -1,0 +1,26 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<form action="#" th:action="@{/reservation/create}" th:object="${reservation}" method="post">
+	<table>
+		<tr>
+			<td>Start Time</td>
+			<td><input type="text" th:field="*{startTime}" /></td>
+			<td th:if="${#fields.hasErrors('startTime')}" th:errors="*{startTime}"></td>
+			<tr />
+		<tr>
+			<td>End Time</td>
+			<td><input type="text" th:field="*{endTime}" /></td>
+			<td th:if="${#fields.hasErrors('endTime')}" th:errors="*{endTime}"></td>
+			<tr />
+
+		<tr>
+
+		<tr>
+			<td><button type="submit">Save Reservation</button></td>
+		</tr>
+	</table>
+
+</form>
+
+
+</html>

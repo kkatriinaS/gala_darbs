@@ -1,4 +1,5 @@
 package lv.backend.models.users;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -21,7 +22,14 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Authorities {
+public class Authorities implements Serializable{
+
+
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue

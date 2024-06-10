@@ -1,7 +1,6 @@
 package lv.backend.services.impl;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -66,14 +65,15 @@ public class ParkingSpotServicesImplementation implements IParkingSpotServices {
 		
 	}
 
+
 	@Override
-	public ParkingSpot createNewParkingSpot(Enum<SpotStatus> spotStatus) {
+	public ParkingSpot updateParkingSpotById(Long id, Enum<SpotStatus> spotStatus) throws MyException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public ParkingSpot updateParkingSpotById(Long id, Enum<SpotStatus> spotStatus) throws MyException {
+	public ParkingSpot createNewParkingSpot(Enum<SpotStatus> spotStatus) {
 		// TODO Auto-generated method stub
 		return null;
 	}

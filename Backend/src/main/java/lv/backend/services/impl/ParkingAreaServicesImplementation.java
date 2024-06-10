@@ -2,13 +2,13 @@ package lv.backend.services.impl;
 
 import java.util.ArrayList;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import lv.backend.models.ParkingArea;
 import lv.backend.models.ParkingSpot;
 import lv.backend.repos.IParkingAreaRepo;
-import lv.backend.repos.IParkingSpotRepo;
 import lv.backend.services.IParkingAreaServices;
 import lv.backend.utils.MyException;
 

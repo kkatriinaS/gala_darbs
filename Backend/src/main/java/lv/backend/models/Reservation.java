@@ -1,7 +1,6 @@
 package lv.backend.models;
 
 import java.time.LocalDateTime;
-import java.util.Collection;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -24,7 +23,7 @@ import lv.backend.models.users.User;
 @Getter
 @Setter
 @NoArgsConstructor
-@ToString
+
 public class Reservation {
 	@Setter(value = AccessLevel.NONE)
 	@Column(name = "Idr")

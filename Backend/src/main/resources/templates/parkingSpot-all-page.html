@@ -29,9 +29,9 @@
             <th>Parking Spot ID</th>
             <th>Spot Status</th>
         </tr>
-        <tr th:each="spot : ${allParkingSpots}">
-            <td th:text="${spot.ids}"></td>
-            <td th:text="${spot.spotStatus}"></td>
+        <tr th:each="parkingSpot : ${allParkingSpots}">
+            <td th:text="${parkingSpot.getIds}"></td>
+            <td th:text="${parkingSpot.getSpotStatus}"></td>
         </tr>
     </table>
 </body>

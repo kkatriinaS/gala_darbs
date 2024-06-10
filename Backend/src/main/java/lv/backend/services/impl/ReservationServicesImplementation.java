@@ -19,9 +19,10 @@ public class ReservationServicesImplementation implements IReservationServices {
 	@Autowired
 	private IReservationRepo reservationRepo;
 
-	public Reservation createNewReservation(Long id, LocalDateTime startTime, LocalDateTime endTime, User user,
+	@Override
+	public Reservation createNewReservation(LocalDateTime startTime, LocalDateTime endTime, User user,
 			ParkingSpot parkingSpot) {
-		return reservationRepo.save(new Reservation(id, endTime, endTime, user, parkingSpot));
+		return reservationRepo.save(new Reservation( 0, endTime, endTime, user, parkingSpot));
 	}
 
 	public Reservation retrieveReservationById(Long id) throws MyException {
@@ -66,11 +67,11 @@ public class ReservationServicesImplementation implements IReservationServices {
 		return null;
 	}
 
-	@Override
+	/*@Override
 	public Reservation createNewReservation(LocalDateTime startTime, LocalDateTime endTime) {
 		// TODO Auto-generated method stub
 		return null;
-	}
+	}*/
 
 	@Override
 	public Reservation updateReservationById(Long id, LocalDateTime startTime, LocalDateTime endTime)

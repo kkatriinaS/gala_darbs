@@ -3,6 +3,7 @@ package lv.backend.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,7 +13,9 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import lv.backend.models.ParkingArea;
 import lv.backend.models.ParkingSpot;
@@ -26,24 +29,13 @@ public class ParkingAreaController {
 	@Autowired
 	private IParkingAreaServices parkingAreaServices;
 	
-	@Autowired
-	private IParkingSpotServices parkingSpotServices;
 
 	@GetMapping("/parkingArea/create")
 	public String createParkingAreaGetFunc(ParkingArea parkingArea, Model model) {
 		model.addAttribute("allParkingAreas", parkingAreaServices.selectAllParkingArea());
 		return "parkingArea-create-page";
 	}
-	/*@PostMapping("/parkingArea/create")
-	public String createParkingAreaPostFunc(@Validated ParkingArea parkingArea, BindingResult result, Model model) {
-	    if (!result.hasErrors()) {
-	        parkingAreaServices.createNewParkingArea(parkingArea.getAreaName(), parkingArea.getTotalSpots(), null);
-	        model.addAttribute("allParkingAreas", parkingAreaServices.selectAllParkingArea());
-	        return "redirect:/parkingArea/showAll";
-	    } else {
-	        return "parkingArea-create-page";
-	    }
-	}*/
+
 	@PostMapping("/parkingArea/create")
 	public ResponseEntity<Void> createParkingAreaPostFunc(@RequestBody @Validated ParkingArea parkingArea, BindingResult result, Model model) {
 	    if (!result.hasErrors()) {
@@ -81,8 +73,28 @@ public class ParkingAreaController {
 			return "parkingArea-all-page";
 		}
 	}
+	
+    @GetMapping("/{id}")
+    public ResponseEntity<ParkingArea> getParkingAreaById(@PathVariable("id") Long id) {
+        try {
+            ParkingArea parkingArea = parkingAreaServices.retrieveParkingAreaById(id);
+            return ResponseEntity.ok(parkingArea);
+        } catch (Exception e) {
+            return ResponseEntity.status(404).build(); // Not Found
+        }
+    }
 
-	@GetMapping("/parkingArea/delete/{id}")
+    @PutMapping("/{id}")
+    public ResponseEntity<ParkingArea> updateParkingAreaById(@PathVariable("id") Long id, @RequestBody ParkingArea parkingArea) {
+        try {
+            ParkingArea updatedParkingArea = parkingAreaServices.updateParkingAreaById(id, parkingArea.getAreaName(), parkingArea.getTotalSpots());
+            return ResponseEntity.ok(updatedParkingArea);
+        } catch (Exception e) {
+            return ResponseEntity.status(400).build(); // Bad Request
+        }
+    }
+
+	@DeleteMapping("/parkingArea/delete/{id}")
 	public String deleteParkingAreaById(@PathVariable("id") Long id, Model model) {
 		try {
 			parkingAreaServices.deleteParkingAreaById(id);
@@ -110,6 +122,8 @@ public class ParkingAreaController {
 		model.addAttribute("allParkingAreas", parkingAreaServices.selectAllParkingArea());
 		return "parkingArea-all-page";
 	}
+	
+
 
 	@GetMapping("/parkingArea/error")
 	public String errorParkingAreaFunc() {

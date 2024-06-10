@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -15,6 +16,7 @@ import lv.backend.services.impl.CustomUserDetailsServiceImpl;
 
 
 @Configuration
+@EnableWebSecurity
 @EnableWebMvc
 public class SecurityConfig {
 
@@ -52,7 +54,9 @@ public class SecurityConfig {
 		.requestMatchers("/parkingSpot/create").permitAll()
 		.requestMatchers("/parkingSpot/showAll").permitAll()
 		.requestMatchers("/parkingArea/update/**").permitAll()
+		.requestMatchers("/parkingSpot/delete/**").permitAll()
 		.requestMatchers("/reservation/showAll").permitAll()
+		.requestMatchers("/reservation/create").permitAll()
 		.requestMatchers("/home").permitAll()
 		.requestMatchers("/register").permitAll()
 		.requestMatchers("/user/error").permitAll()

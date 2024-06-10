@@ -42,6 +42,8 @@ public class ParkingSpot {
 	@JoinColumn(name = "parking_area_id")
 	private ParkingArea parkingArea;
 
+	
+	
 	public ParkingSpot(long ids, SpotStatus spotStatus, Reservation reservation, ParkingArea parkingArea) {
 		super();
 		this.ids = ids;
@@ -60,5 +62,7 @@ public class ParkingSpot {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+
 
 }

@@ -2,9 +2,8 @@ package lv.backend.controllers;
 
 import java.security.Principal;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -26,10 +25,7 @@ public class UserController {
     
     private IUserRepo userRepo;
 
-    private UserServicesImplementation userServicesImplementation;
-
     public UserController(UserServicesImplementation userService) {
-        this.userServicesImplementation = userService;
     }
 
     @GetMapping("/user/create")
@@ -112,8 +108,8 @@ public class UserController {
 
 	 @GetMapping("/home")
 	 public String home(Model model, Principal principal) {
-	  UserDetails userDetails = userServices.loadUserByUsername(principal.getName());
-	  model.addAttribute("userdetail", userDetails);
+	  User user = userServices.findByUsername(principal.getName());
+	  model.addAttribute("userdetail", user);
 	  return "home";
 	 }
 

@@ -1,16 +1,21 @@
 package lv.backend.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
+import lv.backend.models.ParkingArea;
 import lv.backend.models.Reservation;
 import lv.backend.services.IReservationServices;
 
+@Controller
 public class ReservationController {
 	
 	@Autowired
@@ -18,19 +23,22 @@ public class ReservationController {
 
 	@GetMapping("/reservation/create")
 	public String createReservationGetFunc(Reservation reservation, Model model) {
-		model.addAttribute("allreservations", reservationServices.selectAllReservations());
+		model.addAttribute("allReservations", reservationServices.selectAllReservations());
 		return "reservation-create-page";
 	}
 
+	
 	@PostMapping("/reservation/create")
-	public String createReservationPostFunc(@Validated Reservation reservation, BindingResult result) {
-		if (!result.hasErrors()) {
-			reservationServices.createNewReservation(reservation.getStartTime(), reservation.getEndTime());
-			return "redirect:/reservation/showAll";
-		} else {
-			return "reservation-create-page";
-		}
+	public ResponseEntity<Void> createReservationPostFunc(@RequestBody @Validated Reservation reservation, BindingResult result, Model model) {
+	    if (!result.hasErrors()) {
+	        reservationServices.createNewReservation(reservation.getStartTime(), reservation.getEndTime(), null, null);
+	        return ResponseEntity.ok().build();
+	    } else {
+	        return ResponseEntity.badRequest().build();
+	    }
 	}
+
+
 
 	@GetMapping("/reservation/update/{id}")
 	public String updateReservationByIdGetFunc(@PathVariable("id") Long id, Model model) {

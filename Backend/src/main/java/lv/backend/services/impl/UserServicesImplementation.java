@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import lv.backend.dto.UserDto;
@@ -20,7 +19,7 @@ public class UserServicesImplementation implements IUserServices {
 	private IUserRepo userRepo;
 
 	public User createNewUser(String name, String username, String password, String email) {
-		return userRepo.save(new User(0, name, username, password, email, null));
+		return userRepo.save(new User(name, username, password, email, null));
 	}
 
 	public User retrieveUserById(Long id) throws MyException {
@@ -66,7 +65,7 @@ public class UserServicesImplementation implements IUserServices {
 	@Override
 	public User save(UserDto userDto) {
 		User user;
-		user = new User(0, userDto.getName(), userDto.getUsername(), userDto.getPassword(), userDto.getEmail(), null);
+		user = new User(userDto.getName(), userDto.getUsername(), userDto.getPassword(), userDto.getEmail(), null);
 		return userRepo.save(user);
 	}
 

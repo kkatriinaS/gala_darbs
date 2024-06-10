@@ -1,6 +1,5 @@
 package lv.backend.repos;
 
-import java.util.List;
 
 import org.springframework.data.repository.CrudRepository;
 

@@ -1,7 +1,6 @@
 package lv.backend.services;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import lv.backend.models.ParkingSpot;
 import lv.backend.models.SpotStatus;

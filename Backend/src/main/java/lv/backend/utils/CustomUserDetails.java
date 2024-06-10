@@ -12,6 +12,7 @@ import lv.backend.models.users.Authorities;
 import lv.backend.models.users.User;
 
 
+@SuppressWarnings("serial")
 public class CustomUserDetails implements UserDetails {
 
 	private User user;

@@ -1,14 +1,18 @@
 package lv.backend.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
+import lv.backend.models.ParkingArea;
 import lv.backend.models.ParkingSpot;
 import lv.backend.models.SpotStatus;
 import lv.backend.services.IParkingSpotServices;
@@ -23,16 +27,18 @@ public class ParkingSpotController {
 		model.addAttribute("allParkingspots", parkingSpotServices.selectAllParkingSpots());
 		return "parkingSpot-create-page";
 	}
-
+	
 	@PostMapping("/parkingSpot/create")
-	public String createParkingSpotPostFunc(@Validated ParkingSpot parkingSpot, BindingResult result) {
-		if (!result.hasErrors()) {
-			parkingSpotServices.createNewParkingSpot(parkingSpot.getSpotStatus());
-			return "redirect:/parkingSpot/showAll";
-		} else {
-			return "parkingSpot-create-page";
-		}
+	public ResponseEntity<Void> createParkingAreaPostFunc(@RequestBody @Validated ParkingSpot parkingSpot, BindingResult result, Model model) {
+	    if (!result.hasErrors()) {
+	        parkingSpotServices.createNewParkingSpot(parkingSpot.getSpotStatus());
+	        return ResponseEntity.ok().build();
+	    } else {
+	        return ResponseEntity.badRequest().build();
+	    }
 	}
+	
+
 
 	@GetMapping("/parkingspot/update/{id}")
 	public String updateParkingspotByIdGetFunc(@PathVariable("id") Long id, Model model) {
@@ -61,7 +67,7 @@ public class ParkingSpotController {
 		}
 	}
 
-	@GetMapping("/parkingSpot/delete/{id}")
+	@DeleteMapping("/parkingSpot/delete/{id}")
 	public String deleteParkingSpotById(@PathVariable("id") Long id, Model model) {
 		try {
 			parkingSpotServices.deleteParkingSpotById(id);
