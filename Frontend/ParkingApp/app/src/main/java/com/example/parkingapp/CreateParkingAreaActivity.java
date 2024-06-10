@@ -1,11 +1,11 @@
 package com.example.parkingapp;
 
-import static com.example.parkingapp.R.layout.activity_main;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.parkingapp.model.ParkingArea;
@@ -54,11 +54,11 @@ public class CreateParkingAreaActivity extends AppCompatActivity {
 
                 parkingAreaApi.createParkingArea(parkingArea).enqueue(new Callback<Void>() {
                     @Override
-                    public void onResponse(Call<Void> call, Response<Void> response) {
+                    public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
                         if (response.isSuccessful()) {
                             Toast.makeText(CreateParkingAreaActivity.this, "Save successful!", Toast.LENGTH_SHORT).show();
 
-                            Intent intent = new Intent(CreateParkingAreaActivity.this, UserActivity.class);
+                            Intent intent = new Intent(CreateParkingAreaActivity.this, AdminActivity.class);
                             startActivity(intent);
                             finish();
                         } else {
@@ -68,7 +68,7 @@ public class CreateParkingAreaActivity extends AppCompatActivity {
                     }
 
                     @Override
-                    public void onFailure(Call<Void> call, Throwable t) {
+                    public void onFailure(@NonNull Call<Void> call, @NonNull Throwable t) {
                         Toast.makeText(CreateParkingAreaActivity.this, "Save failed!", Toast.LENGTH_SHORT).show();
                         Logger.getLogger(MainActivity.class.getName()).log(Level.SEVERE, "Error occurred", t);
                     }

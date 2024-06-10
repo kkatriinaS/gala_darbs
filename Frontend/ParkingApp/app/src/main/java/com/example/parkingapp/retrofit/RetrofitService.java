@@ -10,6 +10,7 @@ public class RetrofitService {
     private Retrofit retrofit;
 
     public RetrofitService(){
+
         initializeRetrofit();
     }
 

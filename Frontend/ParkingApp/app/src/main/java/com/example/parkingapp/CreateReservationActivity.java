@@ -63,7 +63,7 @@ public class CreateReservationActivity extends AppCompatActivity {
                         if (response.isSuccessful()) {
                             Toast.makeText(CreateReservationActivity.this, "Save successful!", Toast.LENGTH_SHORT).show();
 
-                            Intent intent = new Intent(CreateReservationActivity.this, UserActivity.class);
+                            Intent intent = new Intent(CreateReservationActivity.this, AdminActivity.class);
                             startActivity(intent);
                             finish();
                         } else {

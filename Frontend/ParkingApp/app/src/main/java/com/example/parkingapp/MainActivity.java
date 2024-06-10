@@ -2,6 +2,7 @@ package com.example.parkingapp;
 
 import static com.example.parkingapp.R.layout.activity_main;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -26,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(activity_main);
+        setContentView(R.layout.activity_create_parking_area);
 
         initializeComponents();
     }
@@ -55,11 +56,11 @@ public class MainActivity extends AppCompatActivity {
 
                 parkingAreaApi.createParkingArea(parkingArea).enqueue(new Callback<Void>() {
                     @Override
-                    public void onResponse(Call<Void> call, Response<Void> response) {
+                    public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
                         if (response.isSuccessful()) {
                             Toast.makeText(MainActivity.this, "Save successful!", Toast.LENGTH_SHORT).show();
 
-                            Intent intent = new Intent(MainActivity.this, UserActivity.class);
+                            Intent intent = new Intent(MainActivity.this, AdminActivity.class);
                             startActivity(intent);
                             finish();
                         } else {
@@ -69,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
                     }
 
                     @Override
-                    public void onFailure(Call<Void> call, Throwable t) {
+                    public void onFailure(@NonNull Call<Void> call, @NonNull Throwable t) {
                         Toast.makeText(MainActivity.this, "Save failed!", Toast.LENGTH_SHORT).show();
                         Logger.getLogger(MainActivity.class.getName()).log(Level.SEVERE, "Error occurred", t);
                     }
@@ -80,3 +81,4 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 }
+

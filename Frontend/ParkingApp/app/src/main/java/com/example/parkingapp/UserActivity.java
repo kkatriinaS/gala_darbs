@@ -1,52 +1,54 @@
 package com.example.parkingapp;
 
+import android.content.Intent;
 import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.example.parkingapp.adapters.ParkingAreaAdapter;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.parkingapp.model.ParkingArea;
 import com.example.parkingapp.retrofit.ParkingAreaApi;
 import com.example.parkingapp.retrofit.RetrofitService;
+
 import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class UserActivity extends AppCompatActivity {
 
-    private RecyclerView recyclerView;
-    private ParkingAreaAdapter adapter;
+    private Spinner modelSpinner;
+    private Button selectButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_show_all_parking_areas);
+        setContentView(R.layout.activity_user);
 
-        recyclerView = findViewById(R.id.recyclerViewParkingAreas);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        modelSpinner = findViewById(R.id.modelSpinner);
+        selectButton = findViewById(R.id.selectButton);
 
-        RetrofitService retrofitService = new RetrofitService();
-        ParkingAreaApi parkingAreaApi = retrofitService.getRetrofit().create(ParkingAreaApi.class);
-
-        parkingAreaApi.selectAllParkingArea().enqueue(new Callback<List<ParkingArea>>() {
+        selectButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onResponse(Call<List<ParkingArea>> call, Response<List<ParkingArea>> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    adapter = new ParkingAreaAdapter(response.body());
-                    recyclerView.setAdapter(adapter);
+            public void onClick(View v) {
+                String selectedModel = modelSpinner.getSelectedItem().toString();
+                if (!selectedModel.isEmpty()) {
+                    Intent intent = new Intent(UserActivity.this, ParkingAreaImageActivity.class);
+                    intent.putExtra("selectedModel", selectedModel);
+                    startActivity(intent);
                 } else {
-                    Toast.makeText(UserActivity.this, "Failed to retrieve parking areas", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(UserActivity.this, "Please select a parking area", Toast.LENGTH_SHORT).show();
                 }
-            }
-
-            @Override
-            public void onFailure(Call<List<ParkingArea>> call, Throwable t) {
-                Toast.makeText(UserActivity.this, "An error occurred", Toast.LENGTH_SHORT).show();
             }
         });
     }
 }
+
+
 

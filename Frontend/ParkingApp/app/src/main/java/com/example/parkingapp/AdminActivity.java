@@ -39,14 +39,13 @@ public class AdminActivity extends AppCompatActivity {
             case "ParkingArea":
                 handleAction(selectedModel, CreateParkingAreaActivity.class);
                 break;
-            case "ParkingSpot":
-                handleAction(selectedModel, CreateParkingSpotActivity.class);
-                break;
             case "Reservation":
                 handleAction(selectedModel, CreateReservationActivity.class);
                 break;
+            case "ParkingSpot":
+                handleAction(selectedModel, CreateParkingSpotActivity.class);
+                break;
             default:
-
                 break;
         }
     }
@@ -55,16 +54,15 @@ public class AdminActivity extends AppCompatActivity {
         String selectedModel = modelSpinner.getSelectedItem().toString();
         switch (selectedModel) {
             case "ParkingArea":
-                handleAction(selectedModel, UpdateParkingAreaActivity.class);
-                break;
-            case "ParkingSpot":
-                handleAction(selectedModel, UpdateParkingSpotActivity.class);
+                handleAction(selectedModel, SelectParkingAreaActivity.class);
                 break;
             case "Reservation":
+                handleAction(selectedModel, UpdateParkingSpotActivity.class);
+                break;
+            case "ParkingSpot":
                 handleAction(selectedModel, UpdateReservationActivity.class);
                 break;
             default:
-
                 break;
         }
     }
@@ -75,14 +73,13 @@ public class AdminActivity extends AppCompatActivity {
             case "ParkingArea":
                 handleAction(selectedModel, DeleteParkingAreaActivity.class);
                 break;
-            case "ParkingSpot":
-                handleAction(selectedModel, DeleteParkingSpotActivity.class);
-                break;
             case "Reservation":
                 handleAction(selectedModel, DeleteReservationActivity.class);
                 break;
+            case "ParkingSpot":
+                handleAction(selectedModel, DeleteParkingSpotActivity.class);
+                break;
             default:
-
                 break;
         }
     }

@@ -34,7 +34,7 @@ public class CreateParkingSpotActivity extends AppCompatActivity {
         Spinner spotStatusSpinner = findViewById(R.id.spotStatusSpinner);
         Button saveButton = findViewById(R.id.saveButton);
 
-        // Set up the spinner with SpotStatus values
+
         ArrayAdapter<SpotStatus> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, SpotStatus.values());
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spotStatusSpinner.setAdapter(adapter);
@@ -60,7 +60,7 @@ public class CreateParkingSpotActivity extends AppCompatActivity {
                         if (response.isSuccessful()) {
                             Toast.makeText(CreateParkingSpotActivity.this, "Save successful!", Toast.LENGTH_SHORT).show();
 
-                            Intent intent = new Intent(CreateParkingSpotActivity.this, UserActivity.class);
+                            Intent intent = new Intent(CreateParkingSpotActivity.this, AdminActivity.class);
                             startActivity(intent);
                             finish();
                         } else {

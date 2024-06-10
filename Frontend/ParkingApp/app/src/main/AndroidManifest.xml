@@ -26,11 +26,19 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".AdminActivity" android:exported="true" />
         <activity android:name=".CreateParkingAreaActivity" android:exported="true" />
         <activity android:name=".CreateParkingSpotActivity" android:exported="true" />
         <activity android:name=".CreateReservationActivity" android:exported="true" />
-        <activity android:name=".AdminActivity" android:exported="true" />
+        <activity android:name=".DeleteParkingAreaActivity" android:exported="true" />
+        <activity android:name=".DeleteParkingSpotActivity" android:exported="true" />
+        <activity android:name=".UpdateParkingAreaActivity" android:exported="true" />
+        <activity android:name=".SelectParkingAreaActivity" android:exported="true" />
+        <activity android:name=".UserActivity" android:exported="true" />
+        <activity android:name=".ParkingAreaImageActivity" android:exported="true" />
+
+
+
     </application>
 
-    <uses-permission android:name="android.permission.INTERNET" />
 </manifest>
